@@ -4,8 +4,10 @@ import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import { useRouter } from "next/router";
 
 export default function EventItem({title, date, location, image, id}: DataModel) {
+    const router = useRouter();
     const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'long',
@@ -16,7 +18,7 @@ export default function EventItem({title, date, location, image, id}: DataModel)
     const exploreLink = `/events/${id}`;
 
     return <li className={classes.item}>
-        <img src={'/' + image} alt={title} />
+        <img src={`${router.basePath}/${image}`} alt={title} />
         <div className={classes.content}>
             <div className={classes.summary}>
                 <h2>{title}</h2>
