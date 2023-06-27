@@ -5,12 +5,13 @@ import Link from 'next/link';
 interface Props {
     link?: string;
     onClick?: () => void;
-    children: ReactNode
+    children: ReactNode;
+    type?: "submit" | "button" | "reset"
 }
 
-export default function Button({link, children, onClick}: Props) {
-    if (!link && !onClick)
-        throw new Error('Set either link or onClick on the Button, both cant be left');
+export default function Button({link, children, onClick, type}: Props) {
+    if (!link && (!type || type==="button") && !onClick)
+        throw new Error('Set either link or onClick on the Button or set the type to "submit"');
     
     if (link) {
         return <Link href={link} className={classes.btn}>
@@ -18,7 +19,7 @@ export default function Button({link, children, onClick}: Props) {
         </Link>;
     }
 
-    return <button className={classes.btn} onClick={onClick}>
+    return <button type={type || "button"} className={classes.btn} onClick={onClick}>
         {children}
     </button>;
 }
