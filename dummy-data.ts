@@ -61,6 +61,6 @@ const DUMMY_EVENTS: DataModel[] = [
     return filteredEvents;
   }
   
-  export function getEventById(id: string) {
+  export function getEventById<T>(id: T) {
     return DUMMY_EVENTS.find((event) => event.id === id);
   }
